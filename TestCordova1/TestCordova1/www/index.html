@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+    <meta charset="utf-8" />
+    <!-- AngularsJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+
+    <script src="scripts/index.js"></script>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <title>TestCordova + AngularJS 1</title>
+
+    <!-- TestCordova1 references -->
+    <link href="css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="section">
+        <h4>First try</h4>
+        <hr />
+        <input type="text" ng-model="yourName" placeholder="Enter a name here" /><br />
+        <input type="text" ng-model="yourName" placeholder="Reflexe here" /><br />
+        Hello, {{yourName}} !
+    </div>
+    <div class="section">
+        <h4>Second try</h4>
+        <hr />
+        <h5>Todo list</h5>
+        <div ng-controller="TodoListController as todoList">
+            <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining ({{todoList.curtime | date:"dd-MM-yyyy HH:mm:ss"}})</span>
+            [ <a href="" ng-click="todoList.archive()">archive</a> ]
+            <ul class="unstyled">
+                <li ng-repeat="todo in todoList.todos">
+                    <input type="checkbox" ng-model="todo.done" />
+                    <span class="done-{{todo.done}}">{{todo.text}} - ({{todo.time | date:"dd-MM-yyyy HH:mm:ss"}})</span>
+                </li>
+            </ul>
+            <form ng-submit="todoList.addTodo()">
+                <input type="text" ng-model="todoList.todoText" size="30" placeholder="add new todo here" />
+                <input type="submit" class="btn-primary" value="add" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>
