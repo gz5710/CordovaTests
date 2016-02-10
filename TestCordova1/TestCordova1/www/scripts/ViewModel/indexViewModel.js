@@ -52,7 +52,10 @@ angular.module('todoApp', [])
 
         // define showAll event.
         todoList.showAll = function () {
-            todoList.todos = todoList.allTodos;
+            todoList.todos = [];
+            angular.forEach(todoList.allTodos, function (todo) {
+                todoList.todos.push(todo);
+            });
         };
 
         // define remove event.

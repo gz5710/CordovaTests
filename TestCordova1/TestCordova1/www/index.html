@@ -49,7 +49,7 @@
             [ <a href="" ng-click="todoList.remove()">Remove</a> ]<br />
             <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining </span>
             <ul class="list">
-                <li ng-repeat="todo in todoList.todos">
+                <li ng-repeat="todo in todoList.todos track by $index">
                     <input type="checkbox" ng-click="todoList.checkDone($event, todo)" />
                     <span class="done-{{todo.state}}">
                         <span class="time">{{todo.time | date:"dd-MM-yyyy HH:mm:ss"}}</span><br />
