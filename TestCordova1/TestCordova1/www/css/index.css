@@ -11,7 +11,29 @@
     /*padding : 10px -30px 10px 10px;*/
 }
 
-.done-true{
+.done-1{
     text-decoration : line-through;
     color : grey
+}
+
+.list{
+    list-style : none;
+    margin-left : -40px;
+}
+
+.list li{
+    margin-bottom : 10px;
+}
+
+.addtb{
+    width:150px;
+}
+
+.time{
+    font-size : 80%;
+}
+
+.text{
+    font-size : 120%;
+    margin-left : 5px;
 }

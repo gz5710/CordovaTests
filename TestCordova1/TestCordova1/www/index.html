@@ -2,6 +2,7 @@
 <html ng-app="todoApp">
 <head>
     <meta charset="utf-8" />
+    
     <!-- AngularsJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <!-- Cordova reference, this is added to your app when it's built. -->
@@ -9,39 +10,55 @@
     <script src="scripts/platformOverrides.js"></script>
 
     <script src="scripts/index.js"></script>
+
+    <!------------------------------------ MVVM ------------------------------------------------> 
+    
+    <!--ViewModel-->
+    <script src="scripts/ViewModel/indexViewModel.js"></script>
+    <!--Service-->
+    <script src="scripts/Service/TodoListService.js"></script>
+    <!--Model-->
+    <script src="scripts/Model/Todo.js"></script>    
+    
+    <!------------------------------------ End MVVM ------------------------------------------------> 
+
     <!--
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-    <title>TestCordova + AngularJS 1</title>
+    <title>Todo List</title>
 
     <!-- TestCordova1 references -->
     <link href="css/index.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="section">
+    <!--<div class="section">
         <h4>First try</h4>
         <hr />
         <input type="text" ng-model="yourName" placeholder="Enter a name here" /><br />
         <input type="text" ng-model="yourName" placeholder="Reflexe here" /><br />
         Hello, {{yourName}} !
-    </div>
+    </div>-->
     <div class="section">
-        <h4>Second try</h4>
+        <h3>Todo List</h3>
         <hr />
-        <h5>Todo list</h5>
-        <div ng-controller="TodoListController as todoList">
-            <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining ({{todoList.curtime | date:"dd-MM-yyyy HH:mm:ss"}})</span>
-            [ <a href="" ng-click="todoList.archive()">archive</a> ]
-            <ul class="unstyled">
+        <div ng-controller="TodoListController as todoList">    
+            [ <a href="" ng-click="todoList.showUndo()">Undo</a> / <a href="" ng-click="todoList.showDone()">Done</a> / <a href="" ng-click="todoList.showAll()">All</a> ] 
+            <!--[ <a href="" ng-click="todoList.archive()">Archive</a> ] <br />-->
+            [ <a href="" ng-click="todoList.remove()">Remove</a> ]<br />
+            <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining </span>
+            <ul class="list">
                 <li ng-repeat="todo in todoList.todos">
-                    <input type="checkbox" ng-model="todo.done" />
-                    <span class="done-{{todo.done}}">{{todo.text}} - ({{todo.time | date:"dd-MM-yyyy HH:mm:ss"}})</span>
+                    <input type="checkbox" ng-click="todoList.checkDone($event, todo)" />
+                    <span class="done-{{todo.state}}">
+                        <span class="time">{{todo.time | date:"dd-MM-yyyy HH:mm:ss"}}</span><br />
+                        <span class="text">{{todo.text}}</span>
+                    </span>
                 </li>
             </ul>
             <form ng-submit="todoList.addTodo()">
-                <input type="text" ng-model="todoList.todoText" size="30" placeholder="add new todo here" />
+                <input type="text" class="addtb" ng-model="todoList.todoText" size="30" placeholder="add new todo here" />
                 <input type="submit" class="btn-primary" value="add" />
             </form>
         </div>
